@@ -99,8 +99,8 @@ defmodule Bertex do
   end
 
   defimpl Bert, for: Any do
-    def encode(term), do: term
-    def decode(term), do: term
+    def encode(term) when is_integer(term) or is_float(term) or is_binary(term) or is_map(term), do: term
+    def decode(term) when is_integer(term) or is_float(term) or is_binary(term) or is_map(term), do: term
   end
 
   @doc """

@@ -162,4 +162,12 @@ defmodule Bertex.Test do
     {:ok, date} = DateTime.from_naive(naive, "Etc/UTC")
     assert decode(term_to_binary({:bert, :time, 1255, 270321, 0})) == date
   end
+
+  test "refuses to encode a function" do
+    catch_error(encode(fn x -> x end))
+  end
+
+  test "refuses to decode a function" do
+    catch_error(decode(term_to_binary(fn x -> x + 1 end)))
+  end
 end
